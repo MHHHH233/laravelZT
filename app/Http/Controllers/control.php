@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
 use App\Models\utilisateur;
-
+use App\Models\emp;
+use Illuminate\Support\Facades\Db;
 class control extends Controller
 {
     /**
@@ -56,6 +57,19 @@ class control extends Controller
     {
         Session()->flush();
         return redirect('action');
+    }
+    public function orm()
+    {
+        // $r= emp::select('id','salaire')->where('prenom','LIKE','A%')->get();
+        // $r= emp::where('prenom','LIKE','A%')->get(['id','salaire','services']);
+        // $r= emp::whereBetween('prenom','LIKE','A%')->get(['id','salaire','services']);
+            // $r=emp::sum('salaire');
+            // $r=emp::avg('salaire');
+            // $r=emp::count('salaire');
+            // $r=emp::select('services',DB::raw('count(*) as total'))->groupby('services')->get();
+            // $r=emp::select('services',DB::raw("SUM(salaire) as total"))->groupby('services')->get();
+            $r=emp::select('services',DB::raw("SUM(salaire) as total"))->groupby('services')->having('total','>','200000000')->get();
+        dd($r);
     }
 
     public function index()

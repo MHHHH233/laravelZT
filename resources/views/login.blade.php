@@ -22,6 +22,9 @@
         @enderror
         <input type="submit" value="Login">
         <a href="{{route('action.create')}}">Register</a>
+        
+
     </form>
+    <a href="{{route('orm')}}">Test</a>
 </body>
 </html>

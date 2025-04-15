@@ -9,3 +9,4 @@ Route::get('/', function () {
 Route::Resource('action',control::class)->names('action');
 Route::post('autho',[control::class,"autho"])->name('autho');
 Route::get('logout',[control::class,"logout"])->name('logout');
+Route::get('orm',[control::class,"orm"])->name('orm');

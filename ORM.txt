@@ -1,0 +1,28 @@
+// $rs = utilisateur::all();
+        // $rs = utilisateur::find(3);
+        // $rs = utilisateur::select("id","email","password","type")
+        // ->where('id','>',2)
+        // ->orwhere('email',"baz@gmail.com")
+        // ->get();
+        $rs = utilisateur::where('email',$r->mail)
+        ->where('password',$r->pwd)
+        ->get();
+        if($rs->count() > 0){
+            if($rs[0]->type == 'user'){
+                $r->Session()->regenerate();
+                Session(['l'=>$rs[0]->email,'t'=>$rs[0]->type]);
+                return view('profile');
+            }
+            else{
+                $r->Session()->regenerate();
+                Session(['l'=>$rs[0]->email,'t'=>$rs[0]->type]);
+                $users = utilisateur::all();
+                return view('menuadmin', compact('users'));
+            }
+        }
+        else{
+            return redirect()->Back()->with('msg',"mdp ou email incorrect");
+        }
+        
+        dd($rs);
+    }
