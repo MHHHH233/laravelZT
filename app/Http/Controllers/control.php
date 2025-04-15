@@ -68,7 +68,14 @@ class control extends Controller
             // $r=emp::count('salaire');
             // $r=emp::select('services',DB::raw('count(*) as total'))->groupby('services')->get();
             // $r=emp::select('services',DB::raw("SUM(salaire) as total"))->groupby('services')->get();
-            $r=emp::select('services',DB::raw("SUM(salaire) as total"))->groupby('services')->having('total','>','200000000')->get();
+            // $r=emp::select('services',DB::raw("SUM(salaire) as total"))->groupby('services')->having('total','>','200000000')->get();
+            $r=emp::create([
+                'prenom'=>'Ali',
+                'ville'=>'Tunis',
+                'services'=>'Informatique',
+                'salaire'=>2000,
+                'Date'=>'2023-10-01'
+            ]);
         dd($r);
     }
 
